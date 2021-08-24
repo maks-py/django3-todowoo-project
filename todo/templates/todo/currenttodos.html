@@ -1,0 +1,33 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+
+  <br>
+  <div class="container text-center">
+    <h3>Todo list</h3>
+  </div>
+  <br>
+
+  <div class="container">
+    <div class="col align-self-center">
+      <div class="list-group">
+        {% for todo in todos %}
+          {% if todo.important %}
+            <a class="list-group-item list-group-item-action list-group-item-danger" 
+               href="{% url 'viewtodo' todo.id %}">
+          {% else %}
+            <a class="list-group-item list-group-item-action" href="{% url 'viewtodo' todo.id %}">
+          {% endif %}
+            {{ todo.title | truncatechars:50 | capfirst}}
+            {% if todo.description %} - <i>{{ todo.description | truncatechars:50}}</i>{% endif %}
+            </a>
+        {% endfor %}
+        <a class="list-group-item list-group-item-action list-group-item-success" href="{% url 'createtodo'  %}">
+           + Add
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'todo/base.html' %}
+
+{% block content %}
+  <br>
+  {% if user.is_authenticated %}
+    <h3><p class="text-center text-break">Hi, {{ user.username }}!</p></h3>
+    <h4 class="text-center text-break">Nice to see you again!<br>
+      Maybe you want to check <a href="{% url 'completedtodos' %}">completed</a> tasks,<br>
+      or you need to create <a href="{% url 'createtodo' %}">new one</a>.
+    </h4>
+  {% else %}
+    <h3><p class="text-center text-break">Hi everyone!</p></h3>
+    <h4 class="text-center text-break">
+      This app helps you not worry<br> about routine things in your life.<br><br>
+      <i>Just create a todo task for your need.<br> 
+      Manage tasks by adding, checking and make it complete.</i><br><br>
+      <form action="{% url 'signupuser' %}">
+        If you a new user 
+        <button type="submit" class="btn btn-primary">Start</button>
+      </form>
+      <br>
+      <form action="{% url 'loginuser' %}">
+        or you have an account 
+        <button type="submit" class="btn btn-success">Login</button>
+      </form>
+    </h4>
+  {% endif %}
+
+{% endblock %}
